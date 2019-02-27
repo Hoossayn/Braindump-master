@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.android.braindump">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,13 +23,24 @@
         </activity>
         <activity android:name=".AddTaskActivity" />
         <activity android:name=".UpdateTaskActivity" />
-        <receiver android:name=".AlarmBroadCastReceiver"/>
-        <receiver android:name=".AlarmNotificationReciever" android:enabled="true">
+
+        <receiver android:name=".AlarmBroadCastReceiver" />
+        <receiver
+            android:name=".AlarmNotificationReciever"
+            android:enabled="true">
             <intent-filter>
-                <action android:name="my.action.string" />
                 <!-- and some more actions if you want -->
+                <action android:name="action.play.audio" />
             </intent-filter>
-    </receiver>
+        </receiver>
+
+        <service android:name=".playAudio"/>
+        <service android:name=".snoozeService"/>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="91e512e41f3955af43f3e8d27ed275300401092d" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

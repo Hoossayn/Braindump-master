@@ -23,11 +23,8 @@ public class UpdateTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_task);
 
 
-        editTextTask = findViewById(R.id.editTextTask);
-        editTextDesc = findViewById(R.id.editTextDesc);
-        editTextFinishBy = findViewById(R.id.editTextFinishBy);
 
-        checkBoxFinished = findViewById(R.id.checkBoxFinished);
+        editTextDesc = findViewById(R.id.editTextDesc);
 
 
         final Task task = (Task) getIntent().getSerializableExtra("task");

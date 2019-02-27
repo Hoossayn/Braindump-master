@@ -41,7 +41,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
     MediaRecorder mediaRecorder;
     Context context;
 
-//    private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
 
     public TasksAdapter(Context mCtx, List<Task> taskList) {
         this.mCtx = mCtx;
@@ -56,24 +55,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
     @Override
     public TasksViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mCtx).inflate(R.layout.recyclerview_tasks, parent, false);
-
-/*
-        DateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
-         String reminderTime = AddTaskActivity.aTime;
-            Date date = null;
-
-        {
-            try {
-                date = sdf.parse(reminderTime);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-
-        String time = date.toString();
-        int result = Integer.parseInt(time);
-
-        scheduleNotification(getNotification("time"), result);*/
         
         return new TasksViewHolder(view);
     }
@@ -176,26 +157,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
 
     }
 
-        private void scheduleNotification(Notification notification, int delay) {
-        Intent notificationIntent = new Intent(mCtx, AlarmBroadCastReceiver.class);
-        notificationIntent.putExtra(AlarmBroadCastReceiver.NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(AlarmBroadCastReceiver.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mCtx, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        long futureInMillis = delay - SystemClock.elapsedRealtime();
-        AlarmManager alarmManager = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
-    }
-
-    private Notification getNotification(String content) {
-        Notification.Builder builder = new Notification.Builder(mCtx);
-        builder.setContentTitle("Reminder");
-        builder.setContentText(content);
-        builder.setAutoCancel(true);
-        builder.setSmallIcon(R.mipmap.ic_launcher_round);
-        //builder.setLargeIcon();
-        return builder.build();
-    }
 
     private void setUpMediaRecorder() {
 
