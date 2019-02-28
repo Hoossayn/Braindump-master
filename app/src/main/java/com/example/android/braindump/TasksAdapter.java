@@ -137,6 +137,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
                             mediaPlayer.stop();
                             mediaPlayer.release();
                             setUpMediaRecorder();
+                            playButton.setBackgroundResource(R.drawable.play_arrow_black_24dp);
                         }
                         playButton.setBackgroundResource(R.drawable.play_arrow_black_24dp);
                         state = 0;
@@ -152,6 +153,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
 
             Intent intent = new Intent(mCtx, UpdateTaskActivity.class);
             intent.putExtra("task", task);
+            intent.putExtra("audioDescExtra", task.getAudioDesc());
             mCtx.startActivity(intent);
         }
 

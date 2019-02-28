@@ -93,24 +93,40 @@ public class AddTaskActivity extends AppCompatActivity {
         recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recordButton.requestFocus();
+                //TODO: add an error message when the record button is clicked
+
 
             }
         });
         recordButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN ) {
 
                     startRecording();
                     Toast.makeText(AddTaskActivity.this, "recording", Toast.LENGTH_LONG).show();
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
-                    mediaRecorder.stop();
+                    if(null!= mediaRecorder ){
+                        try {
+                            mediaRecorder.stop();
+                            mediaRecorder.release();
+                            mediaRecorder.reset();
+                            mediaRecorder = null;
+                        }catch (RuntimeException e){
+                            e.printStackTrace();
+                        }
+                    }
+
                     Toast.makeText(AddTaskActivity.this, "recording stopped", Toast.LENGTH_LONG).show();
                     seTimer();
 
+                }else if (event.getAction() == MotionEvent.ACTION_BUTTON_PRESS){
+                    Toast.makeText(context, "record button", Toast.LENGTH_SHORT).show();
+
+                }else if (event.getAction() == MotionEvent.ACTION_BUTTON_RELEASE){
+                    Toast.makeText(context, "record button", Toast.LENGTH_SHORT).show();
                 }
 
                 return true;

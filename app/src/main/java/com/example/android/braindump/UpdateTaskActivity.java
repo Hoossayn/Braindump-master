@@ -6,15 +6,21 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
 
 public class UpdateTaskActivity extends AppCompatActivity {
 
-    private EditText editTextTask, editTextDesc, editTextFinishBy;
-    private CheckBox checkBoxFinished;
+    private EditText editTextDesc;
+    private TextView audioDecs;
+    public static String AUDIO_DESC = "com.example.android.braindump.AUDIO_DESC";
 
 
     @Override
@@ -23,9 +29,11 @@ public class UpdateTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_task);
 
 
-
         editTextDesc = findViewById(R.id.editTextDesc);
+        audioDecs = findViewById(R.id.audioDecs);
 
+        Intent intent = getIntent();
+       // intent.getStringExtra("audioDesc");
 
         final Task task = (Task) getIntent().getSerializableExtra("task");
 
@@ -48,6 +56,11 @@ public class UpdateTaskActivity extends AppCompatActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
+                        String audio = intent.getStringExtra("audioDescExtra");
+                        File file = new File(audio);
+                        file.delete();
+
                         deleteTask(task);
                     }
                 });
